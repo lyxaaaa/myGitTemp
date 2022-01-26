@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B rotation</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            list-style: none;
+        }
+        .list{
+            top: 100px;
+            left: 400px;
+            position: relative;
+            width: 800px;
+            height: 400px;
+            font-size: 100px;
+            list-style: none;
+            text-align: center;
+        }
+        .item{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: all .5s;
+        }
+        .item:nth-child(1){
+            background-color: rgb(42, 218, 159);
+            background-image: url(rotationbanner/banner1.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .item:nth-child(2){
+            background-color: rgb(172, 241, 60);
+            background-image: url(rotationbanner/banner2.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .item:nth-child(3){
+            background-color: rgb(221, 29, 247);
+            background-image: url(rotationbanner/banner3.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .item:nth-child(4){
+            background-color: rgb(228, 55, 107);
+            background-image: url(rotationbanner/banner4.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .item:nth-child(5){
+            background-color: rgb(228, 118, 55);
+            background-image: url(rotationbanner/banner5.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .item:nth-child(6){
+            background-color: rgb(228, 118, 55);
+            background-image: url(rotationbanner/banner6.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .item:nth-child(7){
+            background-color: rgb(228, 118, 55);
+            background-image: url(rotationbanner/banner7.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .item:nth-child(8){
+            background-color: rgb(228, 118, 55);
+            background-image: url(rotationbanner/banner8.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .item:nth-child(9){
+            background-color: rgb(228, 118, 55);
+            background-image: url(rotationbanner/banner9.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .btn{
+            width: 50px;
+            height: 100px;
+            background-color: rgb(0,0, 0,0.4);
+            position:absolute;
+            border: 1px solid black;
+            z-index: 100;
+        }
+        #gopre{
+            left: 400px;
+            top: 250px;
+        }
+        #gonext{
+            left: 1150px;
+            top: 250px;
+        }
+        .active{
+            z-index: 10;
+            opacity: 1;
+        }
+        .pointlist{
+            position: absolute;
+            z-index: 1000;
+            top:450px;
+            left: 800px;
+        }
+        .point{
+           cursor: pointer;
+           float: left;
+           margin-right: 20px;
+            left: 80px;
+            width: 25px;
+            height: 25px;
+           border-radius: 100%;
+            background-color: rgb(0,0,0,0.4);
+        }
+        .point.active{
+            background-color: azure;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <ul class="list">
+            <li class="item active">0</li>
+            <li class="item">1</li>
+            <li class="item">2</li>
+            <li class="item">3</li>
+            <li class="item">4</li>
+            <li class="item">5</li>
+            <li class="item">6</li>
+            <li class="item">7</li>
+            <li class="item">8</li>
+            
+        </ul>
+        <ul class="pointlist">
+            <li class="point active" data-index='0'>&nbsp 0</li>
+            <li class="point" data-index='1'>&nbsp 1</li>
+            <li class="point" data-index='2'>&nbsp 2</li>
+            <li class="point" data-index='3'>&nbsp 3</li>
+            <li class="point" data-index='4'>&nbsp 4</li>
+            <li class="point" data-index='5'>&nbsp 5</li>
+            <li class="point" data-index='6' >&nbsp 6</li>
+            <li class="point" data-index='7'>&nbsp 7</li>
+            <li class="point" data-index='8' >&nbsp 8</li>
+        </ul>
+        <button type="button" class="btn" id="gopre"><</button>
+        <button type="button" class="btn" id="gonext">></button>
+    </div>
+    <script>
+        var items = document.getElementsByClassName('item');
+        var points = document.getElementsByClassName('point');
+        var gopreBtn = document.getElementById('gopre');
+        var gonextBtn = document.getElementById('gonext');
+        var index = 0;
+        var time =0;
+
+        var clearactive = function(){
+            for(var i=0; i<items.length; i++){
+                items[i].className='item';
+            }
+            for(var j=0; j<points.length; j++){
+                points[j].className='point';
+            } 
+        }
+        var goindex = function(){
+            clearactive();
+            items[index].className='item active';
+            points[index].classname='point active';
+            time=0;
+        }
+        var gonext = function(){
+            if(index<8){
+                index++;
+            }
+            else{
+                index=0;
+            }
+            goindex();
+        }
+        var gopre = function(){
+            if(index==0){
+                index=8;
+            }
+            else{
+                index--;
+            }
+            goindex();
+        }
+
+        gonextBtn.addEventListener('click',function(){
+            gonext();
+        })
+
+        gopreBtn.addEventListener('click',function(){
+            gopre();
+        })
+
+        for(var i=0 ;i<points.length;i++){
+            points[i].addEventListener('click',function(){
+                var pointIndex=this.getAttribute('data-index');
+                index = pointIndex;
+                goindex();
+            })
+            time=0;
+        }
+
+        setInterval(function() {
+            time++;
+            if(time==20){
+                goindex();
+                time=0;
+            }
+        }, 100);
+    </script>
+</body>
+</html>
